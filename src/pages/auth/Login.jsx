@@ -25,11 +25,12 @@ export default function Login() {
     const onSubmit = async (data) => {
         try {
             const userData = await login(data).unwrap()
+            console.log("userData", userData)
 
             dispatch(setCredentials({
                 user: userData,
                 token: userData.token,
-                roleId: userData.roleId
+                roleId: userData.user.roleId
             }))
             toast.success("Login successful!");
             navigate(from, { replace: true })

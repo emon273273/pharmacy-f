@@ -47,10 +47,7 @@ const authSlice = createSlice({
 
             // Clear localStorage
             localStorage.clear();
-            // Or selectively remove:
-            // localStorage.removeItem('user');
-            // localStorage.removeItem('token');
-            // localStorage.removeItem('roleId');
+         
         },
     },
 });
