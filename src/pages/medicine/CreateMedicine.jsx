@@ -12,7 +12,7 @@ import { useGetAllCategoriesQuery } from '@/redux/features/category/categoryApi'
 import { useGetAllSuppliersQuery } from '@/redux/features/supplier/supplierApi';
 
 import { Plus, Trash2, ArrowLeft } from 'lucide-react';
-import { typeOf } from 'react-is';
+
 
 const defaultBatch = {
     batchNumber: '',
@@ -180,13 +180,13 @@ export default function CreateMedicine({ onClose }) {
     const { data: categoriesData = [] } = useGetAllCategoriesQuery();
     const { data: suppliersData = [] } = useGetAllSuppliersQuery();
 
-    console.log(typeOf(categoriesData));
+
     const categoryOptions = (categoriesData?.categories || []).map((c) => ({
         id: String(c.id),
         name: c.name,
     }));
 
-    const supplierOptions = (suppliersData?.suppliers || []).map((s) => ({
+    const supplierOptions = (suppliersData?.supplier || []).map((s) => ({
         id: String(s.id),
         name: s.name,
     }));
@@ -247,18 +247,8 @@ export default function CreateMedicine({ onClose }) {
     };
 
     return (
-        <div className="p-6 max-w-5xl mx-auto">
-            <div className="mb-6">
-                <Button
-                    variant="ghost"
-                    onClick={() => navigate('/admin/medicine')}
-                    className="gap-2 text-slate-600 hover:text-slate-900"
-                    type="button"
-                >
-                    <ArrowLeft className="h-4 w-4" />
-                    Back to Medicines
-                </Button>
-            </div>
+        <div className="p-6 max-w-8xl mx-auto">
+
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <Card title="Medicine Information" subtitle="Enter the medicine details">
