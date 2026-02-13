@@ -5,6 +5,8 @@ import { useGetMedicinesQuery } from '@/redux/features/medicine/medicineApi';
 import Card from '@/components/card/Card';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
+import CustomDrawer from '@/components/customDrawer/CustomDrawer';
+import CreateMedicine from './CreateMedicine';
 
 const GetAllMedicine = () => {
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ const GetAllMedicine = () => {
         page: 1,
         count: 10,
     });
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const { data, isLoading } = useGetMedicinesQuery({
         page: pageConfig.page,
@@ -89,16 +92,16 @@ const GetAllMedicine = () => {
 
     return (
         <div className="p-6">
-            <Card
-                title="All Medicines"
-                subtitle="Manage your medicine inventory"
-                action={
-                    <Button onClick={() => navigate('/admin/medicine/create')} className="gap-2">
-                        <Plus className="h-4 w-4" />
-                        Add Medicine
-                    </Button>
-                }
-            >
+            <Card title={"Medicine List"} action={<Button onClick={() => setIsDrawerOpen(true)}>Create Medicine</Button>}>
+                <CustomDrawer
+                    isOpen={isDrawerOpen}
+                    onClose={() => setIsDrawerOpen(false)}
+                    title="Create New Medicine"
+                    description="Fill in the details below to create a new medicine."
+                    width="80"
+                >
+                    <CreateMedicine onClose={() => setIsDrawerOpen(false)} />
+                </CustomDrawer>
                 <DynamicTable
                     title="Medicines"
                     columns={columns}
