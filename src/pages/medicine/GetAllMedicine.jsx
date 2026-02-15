@@ -7,6 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import CustomDrawer from '@/components/customDrawer/CustomDrawer';
 import CreateMedicine from './CreateMedicine';
+import { Eye } from 'lucide-react';
+import { Edit } from 'lucide-react';
+import { Trash } from 'lucide-react';
+import { DeleteButton, EditButton, ViewButton } from '@/components/button/ActionButtons';
 
 const GetAllMedicine = () => {
     const navigate = useNavigate();
@@ -88,6 +92,23 @@ const GetAllMedicine = () => {
             title: 'Created At',
             dataIndex: 'createdAt',
         },
+        {
+            title: "Actions",
+            key: 'actions',
+            render: (record) => (
+                <div className="flex items-center gap-2">
+                    <ViewButton to={`${record.id}`}>
+                        <Eye />
+                    </ViewButton>
+                    <EditButton onClick={() => navigate(`/medicine/${record.id}/edit`)}>
+                        <Edit />
+                    </EditButton>
+                    <DeleteButton onClick={() => navigate(`/medicine/${record.id}/delete`)}>
+                        <Trash />
+                    </DeleteButton>
+                </div>
+            )
+        }
     ];
 
     return (

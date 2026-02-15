@@ -29,6 +29,10 @@ export const medicineApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: ['Medicine'],
         }),
+        getMedicineById: builder.query({
+            query: (id) => `/medicine/${id}`,
+            providesTags: ['Medicine'],
+        }),
     }),
 });
 
@@ -37,4 +41,5 @@ export const {
     useGetAllMedicinesQuery,
     useCreateMedicineMutation,
     useCreateBulkMedicineMutation,
+    useGetMedicineByIdQuery,
 } = medicineApi;
